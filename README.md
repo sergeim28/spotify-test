@@ -19,9 +19,14 @@
 &nbsp;
 # Think about 💡
 - Taking a look at the Spotify API documentation
+Yes, I have managed to get data from Spotify public API
 - Do you resolve each API request one after the other or in parallel?
+I resolve all requests in parallel which is nice in terms of performance.
 - Where do you make the API requests?
+Fetching token is done in App component level, because I think this token is global and should be used in all child components.
+Fetching released this week songs, featured playlists, browse genres are done in DiscoverBlock component, and as they use hooks, component performance is fine means that it does not do any unnecessary rerendering.
 - How much logic do you offload out of the UI components?
+DiscoverBlock component is mainly responsible for UI while Discover is responsible to fetch the data.
 
 &nbsp;
 # What's Already Been Done 🏁
