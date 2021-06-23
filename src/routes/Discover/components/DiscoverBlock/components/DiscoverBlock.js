@@ -17,7 +17,7 @@ export default function DiscoverBlock({ text, id, data, imagesKey = 'images' }) 
   return (
     <div className="discover-block">
       <div className="discover-block__header">
-        <h2>{text}</h2>
+        <h2 style={{ textDecoration: 'uppercase' }}>{text}</h2>
         <span />
         {
           data.length ? (
