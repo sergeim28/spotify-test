@@ -4,18 +4,18 @@ async function client(
   endpoint,
   { data, token, headers: customHeaders, ...customConfig } = {},
 ) {
-  const config = {
-    method: data ? 'POST' : 'GET',
-    body: data ? JSON.stringify(data) : undefined,
-    headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
-      'Content-Type': data ? 'application/json' : undefined,
-      ...customHeaders,
-    },
-    ...customConfig,
-  }
+  if (!token) return Promise.resolve();
 
-  return window.fetch(`${apiURL}/${endpoint}`, config).then(async response => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  return window.fetch(`${apiURL}/${endpoint}`, requestOptions).then(async response => {
     if (response.status === 401) {
       // refresh the page for them
       window.location.assign(window.location)

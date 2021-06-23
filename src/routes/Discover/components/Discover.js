@@ -8,23 +8,15 @@ import { AppContext } from '../../../context/AppContext';
 const Discover= () => {
   const { user } = useContext(AppContext)
 
-  const { data: newReleases } = useQuery({
-    queryKey: 'get-new-releases',
-    queryFn: () =>
-      client(`get-new-releases`, { token: user.token }).then(data => data),
-  })
+  const { data: newReleases } = useQuery(['new-releases', user], () =>
+      client(`new-releases`, { token: user.token }).then(data => data?.albums?.items || []),
+  )
   
-  const { data: playlists } = useQuery({
-    queryKey: 'featured-playlists',
-    queryFn: () =>
-      client(`featured-playlists`, { token: user.token }).then(data => data),
-  })
+  const { data: playlists } = useQuery(['featured-playlists', user], () =>
+      client(`featured-playlists`, { token: user.token }).then(data => data?.playlists?.items || []))
   
-  const { data: categories } = useQuery({
-    queryKey: 'categories',
-    queryFn: () =>
-      client(`categories`, { token: user.token }).then(data => data),
-  })
+  const { data: categories } = useQuery(['categories', user], () =>
+      client(`categories`, { token: user.token }).then(data => data?.categories?.items || []))
 
   return (
     <div className="discover">

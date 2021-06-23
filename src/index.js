@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Routes from './routes';
 import CoreLayout from './common/layouts/CoreLayout';
+import App from './App.js'
 import './styles/_main.scss';
 import { QueryClient, QueryClientProvider } from 'react-query'
  
@@ -15,7 +16,9 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <CoreLayout>
-          <Routes />
+          <App>
+            <Routes />
+          </App>
         </CoreLayout>
       </BrowserRouter>
     </QueryClientProvider>
